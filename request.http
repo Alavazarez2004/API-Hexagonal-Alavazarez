@@ -1,0 +1,37 @@
+###
+POST http://localhost:3000/alumno/agregarAlumno HTTP/1.1
+Content-Type: application/json
+
+{
+  "id" : 1,
+  "nombre" : "Miguel Angel",
+  "apellidoPaterno" : "Alavazarez",
+  "apellidoMaterno" : "Hernández"
+}
+
+###
+DELETE http://localhost:3000/alumno/eliminarAlumno HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : 1
+}
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+###
+POST http://localhost:3000/tarea/agregarTarea HTTP/1.1
+Content-Type: application/json
+
+{
+  "id" : 1,
+  "nombre" : "Tarea de Matemáticas"
+}
+
+###
+DELETE http://localhost:3000/tarea/eliminarTarea HTTP/1.1
+Content-Type: application/json
+
+{
+    "id" : 1
+}

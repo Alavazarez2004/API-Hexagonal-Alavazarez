@@ -1,0 +1,31 @@
+import { Tarea } from "../dominio/tarea";
+import { TareaRepository } from "../dominio/tareaRepository";
+import TareaModel from "./model/tarea.model";
+
+export class MysqlTareaRepository implements TareaRepository{
+
+    async addTarea(id: number, nombre: string): Promise<Tarea | null> {
+        try {
+            const tareaRegistrada = await TareaModel.create({id,nombre});
+            return new Tarea(tareaRegistrada.id, tareaRegistrada.nombre)
+        } catch (error) {
+            console.log("Error en mysqlTarea.repository", error);
+            return null;
+        }
+    }
+
+    async deleteTarea(id: number): Promise<Tarea | null> {
+        try {
+            const tareaEliminada = await TareaModel.findOne({where: {id:id}});
+            if(tareaEliminada){
+                await tareaEliminada.destroy();
+                return new Tarea(tareaEliminada.id,tareaEliminada.nombre);
+            }else{
+                return null;
+            }
+        } catch (error) {
+            console.log("Error en mysqlTarea.repository en DeleteTarea", error);
+            return null;
+        }
+    }
+}
