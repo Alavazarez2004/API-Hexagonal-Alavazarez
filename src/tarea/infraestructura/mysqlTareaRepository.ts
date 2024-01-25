@@ -4,6 +4,36 @@ import TareaModel from "./model/tarea.model";
 
 export class MysqlTareaRepository implements TareaRepository{
 
+    async getAllTarea(): Promise<Tarea[] | null> {
+        try {
+            const tareas = await TareaModel.findAll();
+
+            if (!tareas || tareas.length === 0) {
+                return null;
+            }
+
+            return tareas.map(tarea => new Tarea(tarea.id, tarea.nombre));
+        } catch (error) {
+            console.log("Error en mysqlTarea.repository en GetAllTarea", error);
+            return null;
+        }
+    }
+
+    async getByIdTarea(id: number): Promise<Tarea | null> {
+        try {
+            const tareaEncontrada = await TareaModel.findByPk(id);
+
+            if (!tareaEncontrada) {
+                return null; // Retorna null si no se encuentra la tarea
+            }
+
+            return new Tarea(tareaEncontrada.id, tareaEncontrada.nombre);
+        } catch (error) {
+            console.log("Error en mysqlTarea.repository en GetByIdTarea", error);
+            return null;
+        }
+    }
+
     async addTarea(id: number, nombre: string): Promise<Tarea | null> {
         try {
             const tareaRegistrada = await TareaModel.create({id,nombre});

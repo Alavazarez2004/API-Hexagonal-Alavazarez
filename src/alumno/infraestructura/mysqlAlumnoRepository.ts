@@ -4,6 +4,21 @@ import AlumnoModel from "./model/alumno.model";
 
 export class MysqlAlumnoRepository implements AlumnoRepository{
 
+    async getAllAlumno(): Promise<Alumno[] | null> {
+        try {
+            const alumnos = await AlumnoModel.findAll();
+
+            if (!alumnos || alumnos.length === 0) {
+                return null;
+            }
+
+            return alumnos.map(alumno => new Alumno(alumno.id, alumno.nombre, alumno.apellidoPaterno, alumno.apellidoMaterno));
+        } catch (error) {
+            console.log("Error en mysqlAlumno.repository en GetAllAlumno", error);
+            return null;
+        }
+    }
+    
     async addAlumno(id: number, nombre: string, apellidoPaterno:string, apellidoMaterno:string): Promise<Alumno | null> {
         try {
             const alumnoRegistrado = await AlumnoModel.create({id,nombre,apellidoPaterno,apellidoMaterno});
