@@ -14,7 +14,7 @@ export class MysqlTareaRepository implements TareaRepository{
 
             return tareas.map(tarea => new Tarea(tarea.id, tarea.nombre));
         } catch (error) {
-            console.log("Error en mysqlTarea.repository en GetAllTarea", error);
+            console.log("Error en mysqlTarea.repository", error);
             return null;
         }
     }
@@ -22,14 +22,12 @@ export class MysqlTareaRepository implements TareaRepository{
     async getByIdTarea(id: number): Promise<Tarea | null> {
         try {
             const tareaEncontrada = await TareaModel.findByPk(id);
-
             if (!tareaEncontrada) {
-                return null; // Retorna null si no se encuentra la tarea
+                return null;
             }
-
-            return new Tarea(tareaEncontrada.id, tareaEncontrada.nombre);
+            return new Tarea(tareaEncontrada.id, tareaEncontrada.nombre)
         } catch (error) {
-            console.log("Error en mysqlTarea.repository en GetByIdTarea", error);
+            console.log("Error en mysqlTarea.repository", error);
             return null;
         }
     }

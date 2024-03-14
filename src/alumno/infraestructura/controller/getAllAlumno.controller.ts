@@ -16,8 +16,7 @@ export class GetAllAlumnoController {
             return {
               id: Alumno.id,
               nombre: Alumno.nombre,
-              apellidoPaterno: Alumno.apellidoPaterno,
-              apellidoMaterno: Alumno.apellidoMaterno
+              password: Alumno.password
             };
           }),
         });

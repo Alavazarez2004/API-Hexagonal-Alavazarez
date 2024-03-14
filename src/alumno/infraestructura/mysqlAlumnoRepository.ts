@@ -12,35 +12,37 @@ export class MysqlAlumnoRepository implements AlumnoRepository{
                 return null;
             }
 
-            return alumnos.map(alumno => new Alumno(alumno.id, alumno.nombre, alumno.apellidoPaterno, alumno.apellidoMaterno));
+            return alumnos.map(alumno => new Alumno(alumno.id, alumno.nombre, alumno.password));
         } catch (error) {
             console.log("Error en mysqlAlumno.repository en GetAllAlumno", error);
             return null;
         }
     }
     
-    async addAlumno(id: number, nombre: string, apellidoPaterno:string, apellidoMaterno:string): Promise<Alumno | null> {
+    async addAlumno(id: number, nombre: string, password:string): Promise<Alumno | null> {
         try {
-            const alumnoRegistrado = await AlumnoModel.create({id,nombre,apellidoPaterno,apellidoMaterno});
-            return new Alumno(alumnoRegistrado.id, alumnoRegistrado.nombre, alumnoRegistrado.apellidoPaterno, alumnoRegistrado.apellidoMaterno)
+            const alumnoRegistrado = await AlumnoModel.create({id,nombre,password});
+            return new Alumno(alumnoRegistrado.id, alumnoRegistrado.nombre, alumnoRegistrado.password)
         } catch (error) {
             console.log("Error en mysqlAlumno.repository", error);
             return null;
         }
     }
 
-    async deleteAlumno(id: number): Promise<Alumno | null> {
+
+    async deleteAlumno(nombre: string): Promise<Alumno | null> {
         try {
-            const alumnoEliminado = await AlumnoModel.findOne({where: {id:id}});
+            const alumnoEliminado = await AlumnoModel.findOne({ where: { nombre: nombre } });
             if(alumnoEliminado){
                 await alumnoEliminado.destroy();
-                return new Alumno(alumnoEliminado.id,alumnoEliminado.nombre, alumnoEliminado.apellidoPaterno, alumnoEliminado.apellidoMaterno);
+                return new Alumno(alumnoEliminado.id,alumnoEliminado.nombre, alumnoEliminado.password);
             }else{
                 return null;
             }
         } catch (error) {
-            console.log("Error en mysqlAlumno.repository en DeleteAlumno", error);
+            console.log("Error en mysqlAlumno.repository", error);
             return null;
         }
     }
+    
 }

@@ -2,13 +2,14 @@ import {Model, DataType, Column, Table} from 'sequelize-typescript';
 
 @Table({
     tableName:"alumnos",
-    timestamps:true,
+    timestamps:false,
 })
 
 class AlumnoModel extends Model{
     @Column({
         type:DataType.INTEGER,
-        primaryKey:true
+        primaryKey:true,
+        autoIncrement:true
     })
     public id!:number;
 
@@ -22,13 +23,7 @@ class AlumnoModel extends Model{
         type:DataType.STRING(),
         allowNull:false
     })
-    public apellidoPaterno!:string;
-
-    @Column({
-        type:DataType.STRING(),
-        allowNull:false
-    })
-    public apellidoMaterno!:string;
+    public password!:string;
 }
 
 export default AlumnoModel;

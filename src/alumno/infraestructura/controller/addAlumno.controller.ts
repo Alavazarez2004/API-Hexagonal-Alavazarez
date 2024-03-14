@@ -5,8 +5,8 @@ export class AddAlumnoController{
     constructor(readonly addAlumnoCasoUso:AddAlumnoCasoUso){}
     async run(req:Request , res:Response){
         try {
-            let{id,nombre,apellidoPaterno,apellidoMaterno} = req.body;
-            let alumnoRegistrado = await this.addAlumnoCasoUso.run(id,nombre,apellidoPaterno,apellidoMaterno);
+            let{id,nombre,password} = req.body;
+            let alumnoRegistrado = await this.addAlumnoCasoUso.run(id,nombre,password);
 
             if(alumnoRegistrado){
                 return res.status(200).send({
@@ -14,8 +14,7 @@ export class AddAlumnoController{
                     data:{
                         id: alumnoRegistrado.id,
                         nombre: alumnoRegistrado.nombre,
-                        apellidoPaterno: alumnoRegistrado.apellidoPaterno,
-                        apellidoMaterno: alumnoRegistrado.apellidoMaterno
+                        contraseña: alumnoRegistrado.password
                     },
                     message:"Alumno agregado correctamente"
                 })

@@ -9,7 +9,6 @@ export class GetAllTareaController {
       const Tarea = await this.getAllTareaCasoUso.run();
       console.log(Tarea);
       if (Tarea)
-        //Code HTTP : 200 -> Consulta exitosa
         res.status(200).send({
           status: "success",
           data: Tarea.map((tarea: any) => {
@@ -25,7 +24,6 @@ export class GetAllTareaController {
           msn: "Ocurrio algún problema",
         });
     } catch (error) {
-      //Code HTTP : 204 Sin contenido
       res.status(204).send({
         status: "error",
         data: "Ocurrio un error",

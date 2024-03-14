@@ -5,12 +5,11 @@ export class GetByIdTareaController {
   constructor(readonly getByIdTareaCasoUso: GetByIdTareaCasoUso) {}
 
   async run(req: Request, res: Response) {
-    const id: number = parseInt(req.params.id);
     try {
+      const id: number = parseInt(req.params.id);
       const tarea = await this.getByIdTareaCasoUso.run(id);
 
       if (tarea)
-        //Code HTTP : 200 -> Consulta exitosa
         res.status(200).send({
           status: "success",
           data: {
@@ -19,15 +18,14 @@ export class GetByIdTareaController {
           },
         });
       else
-        res.status(400).send({
+        res.status(404).send({
           status: "error",
-          msn: "Ocurrio algún problema",
+          msn: "Tarea no encontrada",
         });
     } catch (error) {
-      //Code HTTP : 204 Sin contenido
-      res.status(204).send({
+      res.status(500).send({
         status: "error",
-        data: "Ocurrio un error",
+        data: "Ocurrió un error",
         msn: error,
       });
     }

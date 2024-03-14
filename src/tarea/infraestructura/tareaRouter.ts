@@ -6,7 +6,46 @@ import { deleteTareaController } from './dependencies';
 
 export const tareaRouter = express.Router();
 
-tareaRouter.get('/visualizarTareas', getAllTareaController.run.bind(getAllTareaController));
-tareaRouter.get("/:id",getByIdTareaController.run.bind(getByIdTareaController));
-tareaRouter.post('/agregarTarea', addTareaController.run.bind(addTareaController));
-tareaRouter.delete('/eliminarTarea', deleteTareaController.run.bind(deleteTareaController));
+tareaRouter.get('/visualizarTareas', (req, res) => {
+    getAllTareaController.run(req, res)
+      .then(() => {
+       return null;
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error en el archivo tarea.routes.ts');
+    });
+});
+
+tareaRouter.get('/:id', (req, res) => {
+    getByIdTareaController.run(req, res)
+      .then(() => {
+       return null;
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error en el archivo tarea.routes.ts');
+    });
+});
+
+tareaRouter.post('/agregarTarea', (req, res) => {
+    addTareaController.run(req, res)
+      .then(() => {
+       return null;
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error en el archivo tarea.routes.ts');
+    });
+});
+
+tareaRouter.delete('/eliminarTarea', (req, res) => {
+    deleteTareaController.run(req, res)
+      .then(() => {
+       return null;
+      })
+      .catch(error => {
+        console.error(error);
+        res.status(500).send('Error en el archivo tarea.routes.ts');
+    });
+});

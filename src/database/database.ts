@@ -2,6 +2,8 @@ import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
 import TareaModel from "../tarea/infraestructura/model/tarea.model";
 import AlumnoModel from '../alumno/infraestructura/model/alumno.model';
+import SuscripcionModel from '../suscripcion/infraestructura/model/suscripcion.model';
+import PagoModel from '../pago/infraestructura/model/pagoModel';
 
 dotenv.config();
 
@@ -12,7 +14,7 @@ export const sequelize = new Sequelize({
     password: process.env.PASSWORD,
     host: process.env.HOST,
     port: 3306,
-    models: [TareaModel,AlumnoModel]
+    models: [TareaModel,AlumnoModel,SuscripcionModel,PagoModel]
 });
 
 export async function initialDataBase(){

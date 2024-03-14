@@ -7,8 +7,10 @@ import { DeleteAlumnoController } from "./controller/deleteAlumno.controller";
 
 import { GetAllAlumnoCasoUso } from "../aplicacion/getAllAlumno.CasoUso";
 import { GetAllAlumnoController } from "./controller/getAllAlumno.controller";
+//import { EncryptService } from "./EncryptService";
 
 export const mysqlAlumnoRepository = new MysqlAlumnoRepository();
+//export const encryptPassword = new EncryptService();
 export const addAlumnoCasoUso = new AddAlumnoCasoUso(mysqlAlumnoRepository);
 export const addAlumnoController = new AddAlumnoController(addAlumnoCasoUso);
 
